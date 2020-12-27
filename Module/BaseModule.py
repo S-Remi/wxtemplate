@@ -23,7 +23,10 @@ class BaseModule(wx.Panel):
             if i==[]:
                 continue
             key = i.pop(0)
-            self.layout[key][0].Bind(*i)
+            if type(key) is str:
+                self.layout[key][0].Bind(*i)
+            else:
+                key.Bind(*i)
     
     def GetValue(self, key, c=True, default=None):
         key = ("COMMON_" if c else self.basekey) + key
